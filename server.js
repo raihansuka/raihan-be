@@ -16,8 +16,10 @@ app.use('/img', express.static(path.join(__dirname, 'img')))
 const productRoutes = require('./routes/productRoute');
 app.use('/api', productRoutes);
 
-const authRoutes = require('./routes/authRoutes');
-app.use('/auth', authRoutes);
+const authController = require('./controllers/authController');
+app.post('/register', authController.register);
+app.post('/login', authController.login);
+
 
 // Start the server
 const port = 3001; // Anda bisa mengganti port sesuai kebutuhan
