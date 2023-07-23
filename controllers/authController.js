@@ -49,9 +49,11 @@ const login = async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        // Create and sign the JWT token
-        const secretOrPrivateKey = process.env.SECRET_KEY;
-        const token = jwt.sign({ userId: user._id, role: user.role }, secretOrPrivateKey);
+        // Generate JWT token
+        const token = jwt.sign({ user: user.username }, 'raihan', { expiresIn: '1h' });
+
+        // Set the JWT token as a cookie
+        res.cookie('token', token, { maxAge: 3600000, httpOnly: true }); // Expiry set to 1 hour (3600000 milliseconds)
         const role = user.role;
 
 
