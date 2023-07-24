@@ -4,7 +4,7 @@ const Product = require('../models/Product');
 const isAuthenticated = require('../middleware/authMiddleware')
 
 // Rute untuk mendapatkan daftar produk
-router.get('/products',isAuthenticated, async (req, res) => {
+router.get('/products', async (req, res) => {
     try {
         const products = await Product.find();
         res.json(products);
@@ -15,7 +15,7 @@ router.get('/products',isAuthenticated, async (req, res) => {
 });
 
 // Rute untuk mendapatkan detail produk berdasarkan ID
-router.get('/products/:id',isAuthenticated, async (req, res) => { 
+router.get('/products/:id', async (req, res) => { 
     try {
         const productId = req.params.id;
         console.log(productId);
@@ -46,7 +46,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Add the Multer middleware to your routes
-router.post('/products',isAuthenticated, upload.single('image'), async (req, res) => {
+router.post('/products', upload.single('image'), async (req, res) => {
     try {
         const newProduct = req.body;
         console.log(newProduct);
@@ -61,7 +61,7 @@ router.post('/products',isAuthenticated, upload.single('image'), async (req, res
 
 
 // Rute untuk memperbarui produk berdasarkan ID
-router.put('/products/:id',isAuthenticated, async (req, res) => {
+router.put('/products/:id', async (req, res) => {
     try {
         const productId = req.params.id;
         console.log(productId);
@@ -78,7 +78,7 @@ router.put('/products/:id',isAuthenticated, async (req, res) => {
 });
 
 // Rute untuk menghapus produk berdasarkan ID
-router.delete('/products/:id', isAuthenticated,async (req, res) => {
+router.delete('/products/:id',async (req, res) => {
     try {
         const productId = req.params.id;
         console.log(productId);
@@ -94,7 +94,7 @@ router.delete('/products/:id', isAuthenticated,async (req, res) => {
 });
 
 // Pembelian produk
-router.post('/products/:id/buy',isAuthenticated, async (req, res) => {
+router.post('/products/:id/buy', async (req, res) => {
     const quantity = req.body.quantity;
 
     if (isNaN(quantity) || quantity <= 0) {
