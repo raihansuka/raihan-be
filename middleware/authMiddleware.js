@@ -7,7 +7,7 @@ const isAuthenticated = (req, res, next) => {
 
     // Attach the decoded token to the request object
     req.user = decoded.user;
-
+    next(); // Move to the next middleware
   } catch (error) {
     console.error(error);
     return res.status(401).json({ error: "Invalid token" });
