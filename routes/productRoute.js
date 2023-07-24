@@ -4,7 +4,7 @@ const Product = require('../models/Product');
 const isAuthenticated = require('../middleware/authMiddleware')
 
 // Rute untuk mendapatkan daftar produk
-router.get('/products', async (req, res) => {
+router.get('/products',isAuthenticated, async (req, res) => {
     try {
         const products = await Product.find();
         res.json(products);
